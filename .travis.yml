@@ -7,17 +7,7 @@ go:
   - 1.7.x
   - master
   
-matrix:
-  include:
-    - os: osx
-      env:
-        - MY_GOOS=darwin
-        - MY_GOARCH=amd64
-    - os: linux
-      env:
-        - MY_GOOS=linux
-        - MY_GOARCH=amd64
-    - os: windows
-      env:
-        - MY_GOOS=windows
-        - MY_GOARCH=386
+  env:
+    - GIMME_OS=linux GIMME_ARCH=amd64
+    - GIMME_OS=darwin GIMME_ARCH=amd64
+    - GIMME_OS=windows GIMME_ARCH=amd64

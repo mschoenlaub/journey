@@ -11,3 +11,6 @@ go:
   - 1.7.x
   - 1.8.x
   - master
+  
+after_success:
+  - ls ${TRAVIS_BUILD_DIR}

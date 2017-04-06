@@ -1,16 +1,29 @@
 language: go
 go_import_path: github.com/kabukky/journey/
 
-os:
-  - linux
-  - osx
-  - windows
-
 go:
-  - 1.6
   - 1.7.x
   - 1.8.x
-  - master
   
+env:
+  matrix:
+  - MY_GOOS=darwin MY_GOARCH=amd64
+  - MY_GOOS=darwin MY_GOARCH=386
+  - MY_GOOS=linux MY_GOARCH=amd64
+  - MY_GOOS=linux MY_GOARCH=386
+  - MY_GOOS=windows MY_GOARCH=amd64
+  - MY_GOOS=windows MY_GOARCH=386
+  - MY_GOOS=linux MY_GOARCH=arm
+  
+before_install:
+  - export GOOS=${MY_GOOS}
+  - export GOARCH=${MY_GOARCH}
+  - go version
+  - go env
+
 after_success:
-  - ls ${TRAVIS_BUILD_DIR}
+ - go build
+ 
+before_deploy:
+  - zip journey.zip journey content 
+  - "ls -al"

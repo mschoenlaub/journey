@@ -7,10 +7,6 @@ go:
   - 1.7.x
   - master
   
-env:
-  - MY_GOOS=linux
-    MY_GOARCH=amd64
-
 matrix:
   include:
     - os: osx
@@ -19,9 +15,9 @@ matrix:
         - MY_GOARCH=amd64
     - os: linux
       env:
-        - MY_GOOS=windows
+        - MY_GOOS=linux
         - MY_GOARCH=amd64
-    - os: linux
+    - os: windows
       env:
         - MY_GOOS=windows
         - MY_GOARCH=386

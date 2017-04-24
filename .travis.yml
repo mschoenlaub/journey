@@ -20,7 +20,6 @@ matrix:
   - os: osx
   
 before_install:
-  - export GOOS=${MY_GOOS}
   - export GOARCH=${MY_GOARCH}
   - go version
   - go env

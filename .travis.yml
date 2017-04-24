@@ -5,15 +5,19 @@ go:
   - 1.7.x
   - 1.8.x
   
-env:
-  matrix:
-  - MY_GOOS=darwin MY_GOARCH=amd64
-  - MY_GOOS=darwin MY_GOARCH=386
-  - MY_GOOS=linux MY_GOARCH=amd64
-  - MY_GOOS=linux MY_GOARCH=386
-  - MY_GOOS=windows MY_GOARCH=amd64
-  - MY_GOOS=windows MY_GOARCH=386
-  - MY_GOOS=linux MY_GOARCH=arm
+os:
+  - windows
+  - osx
+  - linux
+  
+ env:
+  - MY_GOARCH=amd64
+  - MY_GOARCH=386
+  - MY_GOARCH=arm
+  
+matrix:
+  exclude:
+  - os: osx
   
 before_install:
   - export GOOS=${MY_GOOS}

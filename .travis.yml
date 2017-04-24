@@ -10,15 +10,11 @@ os:
   - osx
   - linux
   
- env:
+env:
   - MY_GOARCH=amd64
   - MY_GOARCH=386
   - MY_GOARCH=arm
-  
-matrix:
-  exclude:
-  - os: osx
-  
+
 before_install:
   - export GOARCH=${MY_GOARCH}
   - go version

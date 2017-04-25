@@ -1,28 +1,29 @@
 language: go
 go_import_path: github.com/kabukky/journey/
-
 go:
-  - 1.7.x
-  - 1.8.x
-  
+- 1.7.x
+- 1.8.x
 os:
-  - windows
-  - osx
-  - linux
-  
+- windows
+- osx
+- linux
 env:
-  - MY_GOARCH=amd64
-  - MY_GOARCH=386
-  - MY_GOARCH=arm
-
+- MY_GOARCH=amd64
+- MY_GOARCH=386
+- MY_GOARCH=arm
 before_install:
-  - export GOARCH=${MY_GOARCH}
-  - go version
-  - go env
-
+- export GOARCH=${MY_GOARCH}
+- go version
+- go env
 after_success:
- - go build
- 
+- go build ./...
 before_deploy:
-  - zip journey.zip journey content 
-  - "ls -al"
+- zip journey-$GOOS-$GOARCH.zip $EXECUTABLE content
+deploy:
+  provider: releases
+  api_key:
+    secure: u5UwmoLqQMAiyJmNQKaJ5AhekNz0CKUoAOc3VETEPpA2k7Xr+rD5Mxchx457Z3nv/tbBTdqhZV75KepsO8WTLXkrMichfKC/bG4mP6mn0YHrdnLWPrOiajmLbI939dzIf+50kxCpVGgzrDs3jHaHJKZ/ZwhP3rqtQ5486YgL1ccI7aCk/G/QfK3bqWX51JIZ1Q59RbTCRai5uGe2RvJ0tQ3xtRZl3a0J21B2FTAlnZWWbEffa5e+XqnlCv5kIsF7dAPQ6oKN1RYfhZ3tkGwvrTr3veEDX6pYRe3v4LtXKhxE+mvfA0+5i9HIDDdchJYp8z6BmBG65J+HLGC5gdXtUdP3H2rdcUG2iOwjCytluPtHzHaxQjlMKcEqikLol3n+ML0rLDu0h5hdHvUDKVkYmdWqd0EfRgvYFOsNV9lSZubHK+VRO4c5DbIs61OcJFAKvah2HhcO6W4rD/RRO4VkB/fT4aFVOUHlX2lt5WTN2Ls0hwdx0QKI/E96pPbUHNocjCPL9XdIsgax36w7VofV/RuiqGvBx34Qp763dg060dOJpDmOzh9Oe/bMNYJuoyP0E5SjHGQVy1BgY8Qco48YBJwuFQe0O743VeW1LE1p37QyB/cltVgCB6xtL2FLMhFaBxf7laRg83iaok4c/Zv71CJi9maOemlTDTl7gmnC8aw=
+  file: "*.zip"
+  on:
+    repo: mschoenlaub/journey
+    branch: development

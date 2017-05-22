@@ -1,24 +1,32 @@
 language: go
 go_import_path: github.com/kabukky/journey/
-go:
-- 1.7.x
-- 1.8.x
-os:
-- windows
-- linux
+matrix:
+  include:
+    - os: linux
+      go: 1.7.x
+    - os: linux
+      go: 1.8.x
+    - os: linux
+      go: tip
+    - os: osx
+      go: 1.8.x
 env:
 - MY_GOARCH=amd64
 - MY_GOARCH=386
 - MY_GOARCH=arm
+
 before_install:
 - export GOARCH=${MY_GOARCH}
 - export GOOS=$(go env GOOS)
 - go version
 - go env
-script: go test ./...
+
+script:
+  - [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" ]]; then go test -v ./... ; fi
+  
 after_success: go build ./...
 before_deploy:
-- zip journey-$GOOS-$GOARCH.zip journey content
+  - zip journey-$GOOS-$GOARCH.zip journey content
 deploy:
   provider: releases
   api_key:

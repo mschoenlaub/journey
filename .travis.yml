@@ -22,7 +22,7 @@ before_install:
 - go env
 
 script:
-  - [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" ]]; then go test -v ./... ; fi
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" ]]; then go test -v ./... ; fi
   
 after_success: go build ./...
 before_deploy:

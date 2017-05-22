@@ -1,15 +1,11 @@
 language: go
 go_import_path: github.com/kabukky/journey/
-matrix:
-  include:
-    - os: linux
-      go: 1.7.x
-    - os: linux
-      go: 1.8.x
-    - os: linux
-      go: tip
-    - os: osx
-      go: 1.8.x
+os:
+  - osx
+  - linux
+go:
+  - tip
+  - 1.8.x
 env:
 - MY_GOARCH=amd64
 - MY_GOARCH=386

@@ -16,6 +16,7 @@ before_install:
 - export GOOS=$(go env GOOS)
 - go version
 - go env
+- if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install pkg-config sqlite; fi
 
 script:
   - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" ]]; then go test -v ./... ; fi

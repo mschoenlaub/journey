@@ -5,7 +5,6 @@ go:
 - 1.8.x
 os:
 - windows
-- osx
 - linux
 env:
 - MY_GOARCH=amd64
@@ -16,8 +15,8 @@ before_install:
 - export GOOS=$(go env GOOS)
 - go version
 - go env
-after_success:
-- go build ./...
+script: go test ./...
+after_success: go build ./...
 before_deploy:
 - zip journey-$GOOS-$GOARCH.zip journey content
 deploy:

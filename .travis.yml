@@ -6,13 +6,15 @@ gobuild_args: -v --tags "libsqlite3"
 os:
   - osx
   - linux
+  
 go:
   - tip
   - 1.8.x
+  
 env:
-- MY_GOARCH=amd64
-- MY_GOARCH=386
-- MY_GOARCH=arm
+- MY_GOARCH=amd64 CGO_ENABLED=1
+- MY_GOARCH=386 CGO_ENABLED=1
+- MY_GOARCH=arm CGO_ENABLED=1
 
 before_install:
 - export GOARCH=${MY_GOARCH}

@@ -1,5 +1,8 @@
 language: go
 go_import_path: github.com/kabukky/journey/
+
+gobuild_args: -v --tags "libsqlite3"
+
 os:
   - osx
   - linux
@@ -16,12 +19,14 @@ before_install:
 - export GOOS=$(go env GOOS)
 - go version
 - go env
+- echo ${gobuild_args}
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force pkg-config sqlite; fi
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)"]]; then go test -v ./... ; fi
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)"]]; then go test -v --tags "libsqlite3" ./... ; fi
   
-after_success: go build ./...
+after_success: go build -v --tags "libsqlite3" ./...
+
 before_deploy:
   - zip journey-$GOOS-$GOARCH.zip journey content
 deploy:

@@ -12,9 +12,12 @@ go:
   - 1.8.x
   
 env:
-- MY_GOARCH=amd64 CGO_ENABLED=1
-- MY_GOARCH=386 CGO_ENABLED=1
-- MY_GOARCH=arm CGO_ENABLED=1
+  global:
+    - CGO_ENABLED=1
+  matrix:
+    - MY_GOARCH=amd64
+    - MY_GOARCH=386
+    - MY_GOARCH=arm
 
 before_install:
 - export GOARCH=${MY_GOARCH}

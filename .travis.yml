@@ -19,7 +19,7 @@ before_install:
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force pkg-config sqlite; fi
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" ]]; then go test -v ./... ; fi
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)"]]; then go test -v ./... ; fi
   
 after_success: go build ./...
 before_deploy:

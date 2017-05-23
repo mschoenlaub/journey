@@ -17,8 +17,7 @@ env:
   matrix:
     - MY_GOARCH=amd64
     - MY_GOARCH=386
-    - MY_GOARCH=arm
-
+    
 before_install:
 - export GOARCH=${MY_GOARCH}
 - export GOOS=$(go env GOOS)

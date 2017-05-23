@@ -23,7 +23,7 @@ before_install:
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force sqlite; fi
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)"]]; then go test -v --tags "libsqlite3" ./... ; fi
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then go test -v --tags "libsqlite3" ./... ; fi
   
 after_success: go build -v --tags "libsqlite3" ./...
 

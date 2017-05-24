@@ -1,9 +1,7 @@
 # Journey
 A blog engine written in Go, compatible with Ghost themes.
 
-**Build Status:** [![Build Status](https://travis-ci.org/mschoenlaub/journey.svg?branch=master)](https://travis-ci.org/mschoenlaub/journey)
-
-**Coveragde:** [![Coverage Status](https://coveralls.io/repos/github/mschoenlaub/journey/badge.svg?branch=master)](https://coveralls.io/github/mschoenlaub/journey?branch=master)
+[![Build Status](https://travis-ci.org/mschoenlaub/journey.svg?branch=master)](https://travis-ci.org/mschoenlaub/journey) [![Coverage Status](https://coveralls.io/repos/github/mschoenlaub/journey/badge.svg?branch=master)](https://coveralls.io/github/mschoenlaub/journey?branch=master)
 
 ![Editor](https://raw.githubusercontent.com/kabukky/journey/gh-pages/images/journey.png)
 

@@ -24,6 +24,7 @@ env:
   global:
     - CGO_ENABLED=1
     - GOTAGS=libsqlite3
+    
   matrix:
     - MY_GOARCH=amd64
     - MY_GOARCH=386
@@ -39,10 +40,10 @@ before_install:
 - go get github.com/mitchellh/gox
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then goveralls -coverprofile=coverage.out -service travis-ci; fi
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then goveralls -service travis-ci; fi
 
 after_success: 
-  - gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}" -tags "libsqlite3"
+  - gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}" -tags $GOTAGS
   
 before_deploy:
   - ls -alh

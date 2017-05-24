@@ -32,10 +32,10 @@ before_install:
 - go get github.com/mitchellh/gox
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then goveralls -service travis-ci; fi
+  - goveralls -service travis-ci
 
 after_success: 
-  - gox -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
+  - gox -cgo -v -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
   - find dist -type f 
 
 deploy:

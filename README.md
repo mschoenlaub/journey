@@ -1,6 +1,8 @@
 # Journey
 A blog engine written in Go, compatible with Ghost themes.
 
+**Build Status:** [![Build Status](https://travis-ci.org/mschoenlaub/journey.svg?branch=master)](https://travis-ci.org/mschoenlaub/journey)
+
 ![Editor](https://raw.githubusercontent.com/kabukky/journey/gh-pages/images/journey.png)
 
 ## About

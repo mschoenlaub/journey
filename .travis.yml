@@ -6,6 +6,9 @@ gobuild_args: -v --tags "libsqlite3"
 dist: trusty
 sudo: false
 
+before_install:
+  - go get github.com/mattn/goveralls
+  
 os:
  # - osx
   - linux
@@ -37,7 +40,8 @@ before_install:
 
 script:
   - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then go test -v --tags "libsqlite3" ./... ; fi
-  
+  - $HOME/gopath/bin/goveralls -service=travis-ci
+
 after_success: go build -v --tags "libsqlite3" ./...
 
 before_deploy:

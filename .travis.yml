@@ -43,17 +43,15 @@ script:
   - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then goveralls -service travis-ci; fi
 
 after_success: 
-  - gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}" -tags $GOTAGS
-  
-before_deploy:
-  - ls -alh
-  
+  - gox -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
+  - find var -type f 
+
 deploy:
   provider: releases
   api_key:
     secure: u5UwmoLqQMAiyJmNQKaJ5AhekNz0CKUoAOc3VETEPpA2k7Xr+rD5Mxchx457Z3nv/tbBTdqhZV75KepsO8WTLXkrMichfKC/bG4mP6mn0YHrdnLWPrOiajmLbI939dzIf+50kxCpVGgzrDs3jHaHJKZ/ZwhP3rqtQ5486YgL1ccI7aCk/G/QfK3bqWX51JIZ1Q59RbTCRai5uGe2RvJ0tQ3xtRZl3a0J21B2FTAlnZWWbEffa5e+XqnlCv5kIsF7dAPQ6oKN1RYfhZ3tkGwvrTr3veEDX6pYRe3v4LtXKhxE+mvfA0+5i9HIDDdchJYp8z6BmBG65J+HLGC5gdXtUdP3H2rdcUG2iOwjCytluPtHzHaxQjlMKcEqikLol3n+ML0rLDu0h5hdHvUDKVkYmdWqd0EfRgvYFOsNV9lSZubHK+VRO4c5DbIs61OcJFAKvah2HhcO6W4rD/RRO4VkB/fT4aFVOUHlX2lt5WTN2Ls0hwdx0QKI/E96pPbUHNocjCPL9XdIsgax36w7VofV/RuiqGvBx34Qp763dg060dOJpDmOzh9Oe/bMNYJuoyP0E5SjHGQVy1BgY8Qco48YBJwuFQe0O743VeW1LE1p37QyB/cltVgCB6xtL2FLMhFaBxf7laRg83iaok4c/Zv71CJi9maOemlTDTl7gmnC8aw=
   file_glob: true
-  file: "*.zip"
+  file: "dist/*.zip"
   skip_cleanup: true
   on:
     repo: mschoenlaub/journey

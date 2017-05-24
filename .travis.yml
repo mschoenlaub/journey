@@ -7,7 +7,7 @@ dist: trusty
 sudo: false
 
 os:
-  - osx
+ # - osx
   - linux
   
 go:
@@ -18,7 +18,7 @@ addons:
   apt:
     packages:
     - g++-multilib
-    - libsqlite3-dev
+    - libsqlite3-dev:i386
     
 env:
   global:

@@ -16,7 +16,7 @@ addons:
   apt:
     packages:
     - g++-multilib
-    - libsqlite3-0
+    - libsqlite3-dev
     
 env:
   global:

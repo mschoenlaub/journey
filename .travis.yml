@@ -27,7 +27,7 @@ env:
     
   matrix:
     - MY_GOARCH=amd64
-    - MY_GOARCH=386
+#   - MY_GOARCH=386
     
 before_install:
 - export GOARCH=${MY_GOARCH}

@@ -35,16 +35,17 @@ before_install:
 - echo ${gobuild_args}
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force sqlite --universal -v; fi
 - go get github.com/mattn/goveralls
+- go get github.com/mitchellh/gox
 
 script:
-  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then go test -v --tags "libsqlite3" ./... ; fi
-  - $HOME/gopath/bin/goveralls -service=travis-ci
+  - if [[ "$(go env GOHOSTOS)" == "$(go env GOOS)" && "$(go env GOHOSTARCH)" == "$(go env GOARCH)" ]]; then go test -covermode=count -coverprofile=coverage.out -v --tags "libsqlite3" ./... ; fi
+  - goveralls -coverprofile=coverage.out -service travis-ci
 
 after_success: 
-  - go build -v --tags "libsqlite3" ./...
-
+  - gox -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}" -tags "libsqlite3"
+  
 before_deploy:
-  - zip journey-$GOOS-$GOARCH.zip journey content
+  - ls -alh
   
 deploy:
   provider: releases

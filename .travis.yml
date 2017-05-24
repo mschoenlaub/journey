@@ -1,8 +1,10 @@
-
 language: go
 go_import_path: github.com/kabukky/journey/
 
 gobuild_args: -v --tags "libsqlite3"
+
+dist: trusty
+sudo: false
 
 os:
   - osx

@@ -7,7 +7,6 @@ dist: trusty
 sudo: false
   
 os:
- # - osx
   - linux
   
 go:
@@ -25,16 +24,9 @@ env:
     - CGO_ENABLED=1
     - GOTAGS=libsqlite3
     
-  matrix:
-    - MY_GOARCH=amd64
-#   - MY_GOARCH=386
-    
 before_install:
-- export GOARCH=${MY_GOARCH}
-- export GOOS=$(go env GOOS)
 - go version
 - go env
-- echo ${gobuild_args}
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force sqlite --universal -v; fi
 - go get github.com/mattn/goveralls
 - go get github.com/mitchellh/gox
@@ -44,7 +36,7 @@ script:
 
 after_success: 
   - gox -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
-  - find var -type f 
+  - find dist -type f 
 
 deploy:
   provider: releases

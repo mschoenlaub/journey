@@ -1,3 +1,4 @@
+
 language: go
 go_import_path: github.com/kabukky/journey/
 
@@ -15,6 +16,7 @@ addons:
   apt:
     packages:
     - g++-multilib
+    - libsqlite3-0
     
 env:
   global:

@@ -23,7 +23,9 @@ jobs:
     env:
       - MY_GOARCH=386
       - MY_GOOS=linux
-    script: go build --tags $GOTAGS ./...
+    script: 
+    - go build -v --tags $GOTAGS ./...
+    - zip journey-$MY_GOOS-$MY_GOARCH journey content
       
 deploy:
   provider: releases
@@ -34,4 +36,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: mschoenlaub/journey
-    tags: false
+    tags: true

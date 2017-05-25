@@ -23,10 +23,10 @@ addons:
     - crossbuild-essential-armhf
     
 env:
-  - MY_GOOS=linux MY_GOARCH=amd64 
-  - MY_GOOS=linux MY_GOARCH=386
-  - MY_GOOS=linux MY_GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf-gcc
-  - MY_GOOS=linux MY_GOARCH=arm64 CC=aarch64-linux-gnu-gcc
+  - "MY_GOOS=linux MY_GOARCH=amd64" 
+  - "MY_GOOS=linux MY_GOARCH=386"
+  - "MY_GOOS=linux MY_GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf-gcc"
+  - "MY_GOOS=linux MY_GOARCH=arm64 CC=aarch64-linux-gnu-gcc"
   
   global:
     - CGO_ENABLED=1

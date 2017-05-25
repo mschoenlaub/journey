@@ -36,4 +36,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: mschoenlaub/journey
-    tags: true
+    tags: false

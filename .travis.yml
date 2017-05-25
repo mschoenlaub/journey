@@ -34,4 +34,4 @@ jobs:
       - MY_GOOS=linux
       - GOCC=aarch64-linux-gnu-gcc
     before_install:
-      - apt-get install crossbuild-essential-arm64
+      - sudo apt-get install crossbuild-essential-arm64

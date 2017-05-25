@@ -1,7 +1,7 @@
 language: go
 go_import_path: github.com/kabukky/journey/
 
-gobuild_args: -v --tags "libsqlite3"
+gobuild_args: -v --tags $GOTAGS
 
 dist: trusty
 sudo: false
@@ -10,22 +10,33 @@ os:
   - linux
   
 go:
-  - tip
   - 1.8.x
-  
+
 addons:
   apt:
     packages:
     - g++-multilib
     - libsqlite3-dev:i386
+    - libsqlite3-dev:armhf
+    - libsqlite3-dev:arm64
+    - crossbuild-essential-arm64
+    - crossbuild-essential-armhf
     
 env:
+  - MY_GOOS=linux MY_GOARCH=amd64 
+  - MY_GOOS=linux MY_GOARCH=386
+  - MY_GOOS=linux MY_GOARCH=arm GOARM=7 CC=arm-linux-gnueabihf-gcc
+  - MY_GOOS=linux MY_GOARCH=arm64 CC=aarch64-linux-gnu-gcc
+  
   global:
     - CGO_ENABLED=1
     - GOTAGS=libsqlite3
     
 before_install:
 - go version
+- export GOOS="${MY_GOOS}"
+- export GOARCH="${MY_GOARCH}"
+- export GOARM="${MY_GOARM}
 - go env
 - if [[ "$(go env GOHOSTOS)" == "darwin" ]]; then brew install --force sqlite --universal -v; fi
 - go get github.com/mattn/goveralls
@@ -35,7 +46,7 @@ script:
   - goveralls -service travis-ci
 
 after_success: 
-  - gox -cgo -verbose -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
+  - gox -cgo -verbose -output "dist/{{.Dir}}-{{.OS}}-{{.Arch}}/{{.Dir}}" -tags $GOTAGS
   - find dist -type f 
 
 deploy:
@@ -43,7 +54,7 @@ deploy:
   api_key:
     secure: u5UwmoLqQMAiyJmNQKaJ5AhekNz0CKUoAOc3VETEPpA2k7Xr+rD5Mxchx457Z3nv/tbBTdqhZV75KepsO8WTLXkrMichfKC/bG4mP6mn0YHrdnLWPrOiajmLbI939dzIf+50kxCpVGgzrDs3jHaHJKZ/ZwhP3rqtQ5486YgL1ccI7aCk/G/QfK3bqWX51JIZ1Q59RbTCRai5uGe2RvJ0tQ3xtRZl3a0J21B2FTAlnZWWbEffa5e+XqnlCv5kIsF7dAPQ6oKN1RYfhZ3tkGwvrTr3veEDX6pYRe3v4LtXKhxE+mvfA0+5i9HIDDdchJYp8z6BmBG65J+HLGC5gdXtUdP3H2rdcUG2iOwjCytluPtHzHaxQjlMKcEqikLol3n+ML0rLDu0h5hdHvUDKVkYmdWqd0EfRgvYFOsNV9lSZubHK+VRO4c5DbIs61OcJFAKvah2HhcO6W4rD/RRO4VkB/fT4aFVOUHlX2lt5WTN2Ls0hwdx0QKI/E96pPbUHNocjCPL9XdIsgax36w7VofV/RuiqGvBx34Qp763dg060dOJpDmOzh9Oe/bMNYJuoyP0E5SjHGQVy1BgY8Qco48YBJwuFQe0O743VeW1LE1p37QyB/cltVgCB6xtL2FLMhFaBxf7laRg83iaok4c/Zv71CJi9maOemlTDTl7gmnC8aw=
   file_glob: true
-  file: "dist/*.zip"
+  file: "*.zip"
   skip_cleanup: true
   on:
     repo: mschoenlaub/journey

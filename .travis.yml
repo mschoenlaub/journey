@@ -35,7 +35,7 @@ script:
   - goveralls -service travis-ci
 
 after_success: 
-  - gox -cgo -v -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
+  - gox -cgo -verbose -output "dist/{{.Dir}}-{{.OS}}_{{.Arch}}/{{.Dir}}" -tags $GOTAGS
   - find dist -type f 
 
 deploy:

@@ -19,8 +19,8 @@ addons:
     - libsqlite3-dev:i386
     - libsqlite3-dev:armhf
     - libsqlite3-dev:arm64
-    - crossbuild-essential-arm64
-    - crossbuild-essential-armhf
+#    - crossbuild-essential-arm64
+#    - crossbuild-essential-armhf
     
 env:
 - MY_GOOS=linux MY_GOARCH=amd64 

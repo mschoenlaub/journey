@@ -32,6 +32,7 @@ jobs:
     - GIMME_ARCH=386
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=linux
+    - GIMME_TYPE=binary
   
   - <<: *build
     env:
@@ -39,7 +40,9 @@ jobs:
     - GOTAGS=libsqlite3
     - GIMME_ARCH=arm64
     - GIMME_OS=linux
-    - GIMME_CC_FOR_TARGET=aarch64-linux-gnu-gcc
+    - CC=aarch64-linux-gnu-gcc
+    - GIMME_TYPE=binary
+    
     before_install:
       - sudo dpkg --add-architecture arm64
       - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty main universe multiverse restricted" 

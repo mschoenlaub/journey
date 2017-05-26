@@ -29,9 +29,6 @@ jobs:
     - GOTAGS=libsqlite3
     - GIMME_ARCH=386
     - GIMME_CGO_ENABLED=1
-    script: 
-    - go build -v --tags $GOTAGS ./...
-    - zip journey-$MY_GOOS-$MY_GOARCH journey content
   
   - <<: *build
     env:

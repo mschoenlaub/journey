@@ -38,4 +38,4 @@ jobs:
       - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty-updates main universe multiverse restricted"
       - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty-security main universe multiverse restricted"
       - sudo apt-get update -yqqq || true # Will fail because not qualified by arch
-      - sudo apt-get install -y libc6-dev:arm64 libsqlite3-dev:arm64 crossbuild-essential-arm64
+      - sudo apt-get install -y libc6-dev:arm64 libsqlite3-dev:arm64 crossbuild-essential-arm64 || true # might fail because java 9 update

@@ -18,6 +18,8 @@ jobs:
 
   - &build
     stage: build
+    go: 
+    - 1.8
     env:
     - GOTAGS=libsqlite3
     script:     
@@ -29,6 +31,7 @@ jobs:
     - GOTAGS=libsqlite3
     - GIMME_ARCH=386
     - GIMME_CGO_ENABLED=1
+    - GIMME_OS=linux
   
   - <<: *build
     env:

@@ -36,4 +36,4 @@ jobs:
       - sudo dpkg --add-architecture arm64
       - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty main universe multiverse restricted" 
       - sudo apt-get update -yqqq || true # Will fail because not qualified by arch
-      - sudo apt-get install crossbuild-essential-arm64
+      - sudo apt-get install -y libc6-dev:arm64 libsqlite3-dev:arm64 crossbuild-essential-arm64

@@ -6,7 +6,7 @@ gobuild_args: -v --tags $GOTAGS
 dist: trusty
         
 global:
-  - CGO_ENABLED=1
+  - GIMME_CGO_ENABLED=1
   - GOTAGS=libsqlite3
   
 jobs:
@@ -14,7 +14,7 @@ jobs:
   - stage: test
     go: 1.8
     env:
-    - MY_GOARCH=amd64
+    - GIMME_GOARCH=amd64
     before_install:
     - go get github.com/mattn/goveralls
     script: goveralls -service travis-ci
@@ -22,16 +22,18 @@ jobs:
   - &build
     stage: build
     env:
-      - MY_GOARCH=386
-      - MY_GOOS=linux
+      - GIMME_ARCH=386
+      - GIMME_ARCH=linux
     script: 
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
   
   - <<: *build
     env:
-      - MY_GOARCH=arm64
-      - MY_GOOS=linux
-      - GOCC=aarch64-linux-gnu-gcc
+      - GIMME_ARCH=arm64
+      - GIMME_OS=linux
+      - GIMME_CC_FOR_TARGET=aarch64-linux-gnu-gcc
     before_install:
+      - sudo dpkg --add-architecture arm64
+      - sudo apt-get update -yq
       - sudo apt-get install crossbuild-essential-arm64

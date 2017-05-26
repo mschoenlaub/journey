@@ -13,8 +13,6 @@ jobs:
   include:
   - stage: test
     go: 1.8
-    env:
-    - GIMME_GOARCH=amd64
     before_install:
     - go get github.com/mattn/goveralls
     script: goveralls -service travis-ci
@@ -23,7 +21,6 @@ jobs:
     stage: build
     env:
       - GIMME_ARCH=386
-      - GIMME_ARCH=linux
     script: 
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey content

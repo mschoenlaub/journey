@@ -15,22 +15,24 @@ jobs:
     go: 1.8
     before_install:
     - go get github.com/mattn/goveralls
+    - sudo apt-get install software-properties-common 
     script: goveralls -service travis-ci
     
   - &build
     stage: build
     env:
-      - GIMME_ARCH=386
+    - GIMME_ARCH=386
     script: 
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
   
   - <<: *build
     env:
-      - GIMME_ARCH=arm64
-      - GIMME_OS=linux
-      - GIMME_CC_FOR_TARGET=aarch64-linux-gnu-gcc
+    - GIMME_ARCH=arm64
+    - GIMME_OS=linux
+    - GIMME_CC_FOR_TARGET=aarch64-linux-gnu-gcc
     before_install:
       - sudo dpkg --add-architecture arm64
+      - sudo apt-add-repository "http://ports.ubuntu.com/ubuntu-ports trusty main universe multiverse restricted" 
       - sudo apt-get update -yq
       - sudo apt-get install crossbuild-essential-arm64

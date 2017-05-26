@@ -4,31 +4,39 @@ go_import_path: github.com/kabukky/journey/
 gobuild_args: -v --tags $GOTAGS
 
 dist: trusty
-        
-global:
- env:
- - GIMME_CGO_ENABLED=1
- - GOTAGS=libsqlite3
-  
+          
 jobs:
   include:
   - stage: test
     go: 1.8
+    env:
+    - GOTAGS=libsqlite3
     before_install:
     - go get github.com/mattn/goveralls
     - sudo apt-get install software-properties-common 
     script: goveralls -service travis-ci
-    
+
   - &build
     stage: build
     env:
+    - GOTAGS=libsqlite3
+    script:     
+    - go build -v --tags $GOTAGS ./...
+    - zip journey-$MY_GOOS-$MY_GOARCH journey content
+
+  - <<: *build
+    env:
+    - GOTAGS=libsqlite3
     - GIMME_ARCH=386
+    - GIMME_CGO_ENABLED=1
     script: 
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
   
   - <<: *build
     env:
+    - GIMME_CGO_ENABLED=1
+    - GOTAGS=libsqlite3
     - GIMME_ARCH=arm64
     - GIMME_OS=linux
     - GIMME_CC_FOR_TARGET=aarch64-linux-gnu-gcc

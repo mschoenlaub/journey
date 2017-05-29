@@ -33,20 +33,12 @@ jobs:
   - <<: *build
     env:
     - GIMME_DEBUG=3
+    - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
     - GOTAGS=libsqlite3
     - GIMME_OS=windows
     - GIMME_ARCH=386
   
-  - <<: *build
-    env:
-    - GIMME_CGO_ENABLED=1
-    - GOTAGS=libsqlite3
-    - GIMME_ARCH=arm64
-    - GIMME_OS=linux
-    - CC=aarch64-linux-gnu-gcc
-    - GIMME_TYPE=binary
-    
     before_install:
       - sudo dpkg --add-architecture arm64
       - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty main universe multiverse restricted" 

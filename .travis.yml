@@ -20,9 +20,12 @@ jobs:
     stage: build
     script:
     - go build -v --tags $GOTAGS ./...
-    - echo $(ls -alh)
-    - zip journey-$MY_GOOS-$MY_GOARCH journey content
-    before_install: true
+    - zip journey-$MY_GOOS-$MY_GOARCH journey$SUFFIX content
+    
+  - <<: *build
+    env:
+    - GIMME_ARCH=386
+    
   - <<: *build
     addons:
      apt:
@@ -36,3 +39,31 @@ jobs:
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=windows
     - GIMME_ARCH=386
+    - SUFFIX=.exe
+    
+  - <<: *build
+    addons:
+     apt:
+      packages:
+       - mingw-w64
+       - binutils-mingw-w64
+    env:
+    - GIMME_DEBUG=3
+    - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
+    - GIMME_CGO_ENABLED=1
+    - GIMME_OS=windows
+    - GIMME_ARCH=386
+    - SUFFIX=.exe
+
+  - <<: *build
+    addons:
+     apt:
+      packages:
+       - mingw-w64
+    env:
+    - GIMME_DEBUG=3
+    - GIMME_CC_FOR_TARGET=x86_64-w64-mingw32-gcc
+    - GIMME_CGO_ENABLED=1
+    - GIMME_OS=windows
+    - GIMME_ARCH=amd64
+    - SUFFIX=.exe

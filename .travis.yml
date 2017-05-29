@@ -20,7 +20,7 @@ jobs:
     stage: build
     script:
     - go build -v --tags $GOTAGS ./...
-    - ls -alh
+    - echo $(ls -alh)
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
     before_install: true
   - <<: *build

@@ -34,7 +34,6 @@ jobs:
        - g++-mingw-w64-i686
        - binutils-mingw-w64-i686
     env:
-    - GIMME_DEBUG=3
     - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=windows
@@ -46,9 +45,7 @@ jobs:
      apt:
       packages:
        - mingw-w64
-       - binutils-mingw-w64
     env:
-    - GIMME_DEBUG=3
     - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=windows
@@ -61,7 +58,6 @@ jobs:
       packages:
        - mingw-w64
     env:
-    - GIMME_DEBUG=3
     - GIMME_CC_FOR_TARGET=x86_64-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=windows

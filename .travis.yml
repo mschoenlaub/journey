@@ -20,7 +20,7 @@ jobs:
     before_install: true
     script:
     - go build -v --tags $GOTAGS ./...
-    - zip journey-$GOOS-$GOARCH journey$SUFFIX content
+    - zip journey-$(go env GOOS)-$(go env GOARCH) journey$SUFFIX content
     
   - <<: *build
     env:

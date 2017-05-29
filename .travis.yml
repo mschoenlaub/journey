@@ -31,7 +31,7 @@ jobs:
        - binutils-mingw-w64-i686
     env:
     - GIMME_DEBUG=3
-    - CC=i686-w64-mingw32-gcc
+    - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
     - GIMME_OS=windows
     - GIMME_ARCH=386

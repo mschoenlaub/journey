@@ -78,8 +78,8 @@ jobs:
     - SUFFIX=.exe
 
   - <<: *build
-    env:
     os: osx
+    env:
     - GIMME_CGO_ENABLED=1
     
 deploy:

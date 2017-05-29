@@ -32,6 +32,7 @@ jobs:
     before_install: true
   - <<: *build
     env:
+    - GIMME_DEBUG=3
     - GIMME_CGO_ENABLED=1
     - GOTAGS=libsqlite3
     - GIMME_OS=windows

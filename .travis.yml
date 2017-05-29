@@ -19,7 +19,7 @@ jobs:
     <<: *test
     stage: build
     script:
-    - go build --verbose --tags $GOTAGS ./...
+    - go build -v --tags $GOTAGS ./...
     - ls -alh
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
     before_install: true

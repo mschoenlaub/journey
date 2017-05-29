@@ -20,29 +20,20 @@ jobs:
   - &build
     <<: *test
     stage: build
+    script:
+    - go build -v --tags $GOTAGS ./...
+    - zip journey-$MY_GOOS-$MY_GOARCH journey content
+    before_install: true
+  - <<: *build
     addons:
      apt:
       packages:
        - gcc-mingw-w64-i686
        - g++-mingw-w64-i686
        - binutils-mingw-w64-i686
-    script:
-    - go build -v --tags $GOTAGS ./...
-    - zip journey-$MY_GOOS-$MY_GOARCH journey content
-    before_install: true
-  - <<: *build
     env:
     - GIMME_DEBUG=3
     - GIMME_CC_FOR_TARGET=i686-w64-mingw32-gcc
     - GIMME_CGO_ENABLED=1
-    - GOTAGS=libsqlite3
     - GIMME_OS=windows
     - GIMME_ARCH=386
-  
-    before_install:
-      - sudo dpkg --add-architecture arm64
-      - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty main universe multiverse restricted" 
-      - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty-updates main universe multiverse restricted"
-      - sudo apt-add-repository "deb http://ports.ubuntu.com/ubuntu-ports trusty-security main universe multiverse restricted"
-      - sudo apt-get update -yqqq || true # Will fail because not qualified by arch
-      - sudo apt-get install -y libc6-dev:arm64 libsqlite3-dev:arm64 crossbuild-essential-arm64 || true # might fail because java 9 update

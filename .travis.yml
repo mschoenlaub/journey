@@ -12,12 +12,12 @@ jobs:
     go: 1.8.x
     before_install:
     - go get github.com/mattn/goveralls
-    - sudo apt-get install software-properties-common 
     script: goveralls -service travis-ci
 
   - &build
     <<: *test
     stage: build
+    before_install: true
     script:
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey$SUFFIX content
@@ -82,6 +82,12 @@ jobs:
     env:
     - GIMME_CGO_ENABLED=1
     
+  - <<: *build
+    os: osx
+    env:
+    - GIMME_CGO_ENABLED=1
+    - GIMME_ARCH=386
+    
 deploy:
   provider: releases
   api_key:
@@ -91,4 +97,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: mschoenlaub/journey
-    tags: true
+    tags: false

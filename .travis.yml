@@ -26,7 +26,7 @@ jobs:
        - gcc-mingw-w64-i686
        - g++-mingw-w64-i686
        - binutils-mingw-w64-i686
-    script:     
+    script:
     - go build -v --tags $GOTAGS ./...
     - zip journey-$MY_GOOS-$MY_GOARCH journey content
     before_install: true

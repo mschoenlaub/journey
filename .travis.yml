@@ -1,7 +1,7 @@
 language: go
 go_import_path: github.com/kabukky/journey/
 
-gobuild_args: -v --tags $GOTAGS
+gobuild_args: -v --tags $GOTAGS0
 
 dist: trusty
           
@@ -20,7 +20,7 @@ jobs:
     before_install: true
     script:
     - go build -v --tags $GOTAGS ./...
-    - zip journey-$MY_GOOS-$MY_GOARCH journey$SUFFIX content
+    - zip journey-$GOOS-$GOARCH journey$SUFFIX content
     
   - <<: *build
     env:

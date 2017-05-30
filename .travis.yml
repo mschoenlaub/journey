@@ -4,7 +4,11 @@ go_import_path: github.com/kabukky/journey/
 gobuild_args: -v --tags $GOTAGS0
 
 dist: trusty
-          
+
+cache:
+  directories:
+    - $GOROOT
+
 jobs:
   include:
   - &test

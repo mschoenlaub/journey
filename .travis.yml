@@ -5,10 +5,6 @@ gobuild_args: -v --tags $GOTAGS0
 
 dist: trusty
 
-cache:
-  directories:
-    - $GOROOT
-
 jobs:
   include:
   - &test
